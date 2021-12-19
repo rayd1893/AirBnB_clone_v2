@@ -146,12 +146,3 @@ class Test_docstrings(unittest.TestCase):
         only members for which the predicate returns a true value are included
         """
         self.obj_members(BaseModel, inspect.isfunction)
-
-    def test_module_dostring(self):
-        """
-        Test for exist module docstrings
-        """
-        self.assertIsNotNone(models.base_model.__doc__,
-                             "base_model.py file needs a docstrings")
-        self.assertTrue(len(__doc__) > 0, " base_model.py have docstrings")
-        self.assertFalse(len(__doc__) < 0, " base_model  have docstrings")
