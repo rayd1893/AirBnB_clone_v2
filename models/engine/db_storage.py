@@ -2,7 +2,7 @@
 
 from os import getenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 # from models import *
 
@@ -53,9 +53,10 @@ class DBStorage:
     def reload(self):
         """ Create database in Alchemy"""
         Base.metadata.create_all(self.__engine)
-        self.__session = Session
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(Session)
+        self.__session = Session
+        
 
     def close(self):
         """ Close Session """
