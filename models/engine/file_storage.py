@@ -16,14 +16,16 @@ class FileStorage:
         if cls is None:
             return self.__objects
         else:
+            # print("CLASE: {}".format(cls))
             my_dict = {}
-            # print("N: {}".format(self.__objects))
+            # print("OBJECTS: {}".format(self.__objects))
             for key in self.__objects:
                 name = key.split('.')
-                # print("K: {}".format(name)) 
+                # print("NAME: {}".format(name))
+                # print("CLSNAME: {}".format(cls.__name__)) 
                 if name[0] == cls.__name__:
                     my_dict[key] = self.__objects[key]
-            # print("P: {}".format(my_dict)) 
+            # print("MY_DICT: {}".format(my_dict)) 
             return my_dict
             
     def new(self, obj):
