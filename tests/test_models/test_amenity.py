@@ -95,3 +95,26 @@ class test_Amenity_BaseModel(unittest.TestCase):
         self.assertNotEqual(user_1.created_at, user_2.created_at)
         self.assertNotEqual(user_1.created_at, user_3.created_at)
         self.assertNotEqual(user_3.created_at, user_2.created_at)
+
+    def test_str_method(self):
+        """
+        Testin str magic method
+        """
+        inst = Amenity()
+        str_output = "[Amenity] ({}) {}".format(inst.id, inst.__dict__)
+        self.assertEqual(str_output, str(inst))
+    
+    @patch('models.storage')
+    def test_save_method(self, mock_storage):
+        """Testing save method and if it update"""
+        instance5 = Amenity()
+        created_at = instance5.created_at
+        sleep(2)
+        updated_at = instance5.updated_at
+        instance5.save()
+        new_created_at = instance5.created_at
+        sleep(2)
+        new_updated_at = instance5.updated_at
+        self.assertNotEqual(updated_at, new_updated_at)
+        self.assertEqual(created_at, new_created_at)
+        self.assertTrue(mock_storage.save.called)
