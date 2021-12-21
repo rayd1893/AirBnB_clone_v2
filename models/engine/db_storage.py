@@ -4,6 +4,7 @@ from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
+from models.state import State
 # from models import *
 
 class DBStorage:
@@ -27,6 +28,11 @@ class DBStorage:
         
     def all(self, cls=None):
         """ Show all class objects in DB storage or specified class """
+        from models.city import City
+        from models.user import User
+        from models.place import Place
+        from models.review import Review
+        from models.amenity import Amenity
         my_dict = {}
         classes = [State, City, User, Place, Review, Amenity]
         if cls:
@@ -53,9 +59,11 @@ class DBStorage:
     def reload(self):
         """ Create database in Alchemy"""
         Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        Session = scoped_session(Session)
-        self.__session = Session
+        Session = sessionmaker()
+        Session.configure(bind=self.__engine)
+        #Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        #Session = scoped_session(Session)
+        self.__session = Session()
         
 
     def close(self):
