@@ -18,6 +18,7 @@ class User(BaseModel, Base):
         last_name = Column(String(128), nullable=True)
 
         places = relationship("Place")
+        reviews = relationship("Review")
     else:
         email = ''
         password = ''
