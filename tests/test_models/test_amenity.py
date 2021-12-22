@@ -7,8 +7,9 @@ from datetime import datetime
 from unittest.mock import patch
 from time import sleep
 import pycodestyle
+import inspect
 import unittest
-
+storage_t = getenv("HBNB_TYPE_STORAGE")
 
 class test_Amenity(test_basemodel):
     """ """
@@ -123,60 +124,50 @@ class test_Amenity_BaseModel(unittest.TestCase):
 
 
 class TestAmenity(unittest.TestCase):
-    """this will test the Amenity class X"""
+    """Test the Amenity class"""
 
-    @classmethod
-    def setUpClass(cls):
-        """set up for test"""
-        cls.amenity = Amenity()
-        cls.amenity.name = "Breakfast"
+    def test_is_subclass(self):
+        """Test that Amenity is a subclass of BaseModel"""
+        amenity = Amenity()
+        self.assertIsInstance(amenity, BaseModel)
+        self.assertTrue(hasattr(amenity, "id"))
+        self.assertTrue(hasattr(amenity, "created_at"))
+        self.assertTrue(hasattr(amenity, "updated_at"))
 
-    @classmethod
-    def teardown(cls):
-        """at the end of the test this will tear it down"""
-        del cls.amenity
+    def test_name_attr(self):
+        """Test that Amenity has attribute name, and it's as an empty string"""
+        amenity = Amenity()
+        self.assertTrue(hasattr(amenity, "name"))
+        if storage_t == 'db':
+            self.assertEqual(amenity.name, None)
+        else:
+            self.assertEqual(amenity.name, "")
 
-    def tearDown(self):
-        """teardown"""
-        try:
-            os.remove("file.json")
-        except Exception:
-            pass
+    def test_to_dict_creates_dict(self):
+        """test to_dict method creates a dictionary with proper attrs"""
+        am = Amenity()
+        print(am.__dict__)
+        new_d = am.to_dict()
+        self.assertEqual(type(new_d), dict)
+        self.assertFalse("_sa_instance_state" in new_d)
+        for attr in am.__dict__:
+            if attr is not "_sa_instance_state":
+                self.assertTrue(attr in new_d)
+        self.assertTrue("__class__" in new_d)
 
-    def test_pep8_Amenity(self):
-        """Tests pep8 style"""
-        style = pep8.StyleGuide(quiet=True)
-        p = style.check_files(['models/amenity.py'])
-        self.assertEqual(p.total_errors, 0, "fix pep8")
+    def test_to_dict_values(self):
+        """test that values in dict returned from to_dict are correct"""
+        t_format = "%Y-%m-%dT%H:%M:%S.%f"
+        am = Amenity()
+        new_d = am.to_dict()
+        self.assertEqual(new_d["__class__"], "Amenity")
+        self.assertEqual(type(new_d["created_at"]), str)
+        self.assertEqual(type(new_d["updated_at"]), str)
+        self.assertEqual(new_d["created_at"], am.created_at.strftime(t_format))
+        self.assertEqual(new_d["updated_at"], am.updated_at.strftime(t_format))
 
-    def test_checking_for_docstring_Amenity(self):
-        """checking for docstrings"""
-        self.assertIsNotNone(Amenity.__doc__)
-
-    def test_attributes_Amenity(self):
-        """chekcing if amenity have attibutes"""
-        self.assertTrue('id' in self.amenity.__dict__)
-        self.assertTrue('created_at' in self.amenity.__dict__)
-        self.assertTrue('updated_at' in self.amenity.__dict__)
-        self.assertTrue('name' in self.amenity.__dict__)
-
-    def test_is_subclass_Amenity(self):
-        """test if Amenity is subclass of Basemodel"""
-        self.assertTrue(issubclass(self.amenity.__class__, BaseModel), True)
-
-    def test_attribute_types_Amenity(self):
-        """test attribute type for Amenity"""
-        self.assertEqual(type(self.amenity.name), str)
-
-    def test_save_Amenity(self):
-        """test if the save works"""
-        self.amenity.save()
-        self.assertNotEqual(self.amenity.created_at, self.amenity.updated_at)
-
-    def test_to_dict_Amenity(self):
-        """test if dictionary works"""
-        self.assertEqual('to_dict' in dir(self.amenity), True)
-
-
-if __name__ == "__main__":
-    unittest.main()
+    def test_str(self):
+        """test that the str method has the correct output"""
+        amenity = Amenity()
+        string = "[Amenity] ({}) {}".format(amenity.id, amenity.__dict__)
+        self.assertEqual(string, str(amenity))
