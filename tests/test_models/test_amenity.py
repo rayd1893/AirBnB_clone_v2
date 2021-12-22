@@ -123,7 +123,7 @@ class test_Amenity_BaseModel(unittest.TestCase):
 
 
 class TestAmenity(unittest.TestCase):
-    """this will test the Amenity class"""
+    """this will test the Amenity class X"""
 
     @classmethod
     def setUpClass(cls):

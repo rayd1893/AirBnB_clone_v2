@@ -161,7 +161,7 @@ class Test_docstrings(unittest.TestCase):
 
 
 class TestBaseModel(unittest.TestCase):
-    """this will test the base model class"""
+    """this will test the base model class x"""
 
     @classmethod
     def setUpClass(cls):
