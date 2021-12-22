@@ -167,3 +167,7 @@ class TestAmenity(unittest.TestCase):
     def test_Amenity_sa_instance_state(self):
         """ test is _sa_instance_state has been removed """
         self.assertNotIn('_sa_instance_state', self.amen.to_dict())
+
+
+if __name__ == "__main__":
+    unittest.main()
