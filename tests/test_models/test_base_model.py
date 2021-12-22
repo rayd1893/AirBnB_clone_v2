@@ -17,7 +17,6 @@ class test_basemodel(unittest.TestCase):
         super().__init__(*args, **kwargs)
         self.name = 'BaseModel'
         self.value = BaseModel
-    
     """
     A class to test pep8 on base_model file"""
     def test_pycodestyle(self):
@@ -36,8 +35,8 @@ class test_basemodel(unittest.TestCase):
     def tearDown(self):
         try:
             os.remove('file.json')
-        except:
-            pass
+        # except:
+        #     pass
 
     def test_default(self):
         """ """
@@ -134,6 +133,7 @@ class test_basemodel(unittest.TestCase):
                                                      instance6.__dict__)
         self.assertEqual(string_output, str(instance6))
 
+
 class TestCodeFormat(unittest.TestCase):
     """
     A class to test pep8 on base_model file"""
@@ -145,6 +145,7 @@ class TestCodeFormat(unittest.TestCase):
         result = pycostyle.check_files(['models/base_model.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
+
 
 class Test_docstrings(unittest.TestCase):
     """Test docstrings"""

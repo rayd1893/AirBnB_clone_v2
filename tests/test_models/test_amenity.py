@@ -24,10 +24,9 @@ class test_Amenity(test_basemodel):
         new = self.value()
         self.assertEqual(type(new.name), str)
 
+
 class Test_PEP8(unittest.TestCase):
     """test User"""
-
-
     def test_pep8_user(self):
         """test pep8 style"""
         pep8style = pycodestyle.StyleGuide(quiet=True)
@@ -44,6 +43,7 @@ class test_inherit_basemodel(unittest.TestCase):
         self.assertIsInstance(user, Amenity)
         self.assertTrue(issubclass(type(user), BaseModel))
         self.assertEqual(str(type(user)), "<class 'models.amenity.Amenity'>")
+
 
 class test_Amenity_BaseModel(unittest.TestCase):
     """Testing user class"""
@@ -105,7 +105,7 @@ class test_Amenity_BaseModel(unittest.TestCase):
         inst = Amenity()
         str_output = "[Amenity] ({}) {}".format(inst.id, inst.__dict__)
         self.assertEqual(str_output, str(inst))
-    
+
     @patch('models.storage')
     def test_save_method(self, mock_storage):
         """Testing save method and if it update"""
