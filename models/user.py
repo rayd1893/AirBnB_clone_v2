@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """This module defines a class User"""
-from os import getenv, lseek
+from os import getenv
 from sqlalchemy.sql.schema import Column
 from sqlalchemy.sql.sqltypes import String
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
-import models
+
 
 if getenv("HBNB_TYPE_STORAGE") == "db":
     class User(BaseModel, Base):
@@ -20,6 +20,7 @@ if getenv("HBNB_TYPE_STORAGE") == "db":
         reviews = relationship("Review")
 else:
     class User(BaseModel):
+        '''Defined class to work with FileStorage'''
         email = ''
         password = ''
         first_name = ''
