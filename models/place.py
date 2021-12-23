@@ -16,7 +16,7 @@ place_amenity = Table('place_amenity', Base.metadata, Column('place_id',
 
 if getenv("HBNB_TYPE_STORAGE") == "db":
     class Place(BaseModel, Base):
-        """ A place to stay """    
+        """ A place to stay """
         __tablename__ = "places"
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60),  ForeignKey('users.id'), nullable=False)
@@ -30,7 +30,7 @@ if getenv("HBNB_TYPE_STORAGE") == "db":
         longitude = Column(Float, nullable=True)
 
         amenities = relationship("Amenity", secondary=place_amenity,
-                                viewonly=False)
+                                 viewonly=False)
 else:
     class User(BaseModel):
         """Defined class to work with FileStorage"""
