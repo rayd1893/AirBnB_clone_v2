@@ -16,7 +16,7 @@ def do_pack():
     folder = "web_static"
     tar = "versions/" + folder + "_" + year + month + day
     tar += hour + minute + second
-    command = "tar -cvzf "+ tar + ".tgz " + folder
+    command = "tar -cvzf " + tar + ".tgz " + folder
     try:
         local("mkdir -p version")
         local(command)
