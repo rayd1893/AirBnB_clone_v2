@@ -1,11 +1,17 @@
 #!/usr/bin/python3
-'''Create file tgz that contents web statics'''
+"""
+Fabric script that generates a .tgz archive from the
+contents of the web_static folder of your AirBnB Clone
+"""
 from fabric.api import local
 from datetime import datetime
 
 
 def do_pack():
-    '''Function to run fabric'''
+    """
+    must return the archive path if the archive has been correctly
+    generated. Otherwise, it should return None
+    """
     now = datetime.now()
     year = str(now.year)
     month = str(now.month).zfill(2)
