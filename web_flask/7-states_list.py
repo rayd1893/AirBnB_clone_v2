@@ -21,10 +21,7 @@ def teardown_db(exception):
 def states_list():
     '''List all States'''
 
-    states = []
-    for k, v in storage.all(State).items():
-        states.append(v.to_dict())
-    return render_template('7-states_list.html', states=states)
+    return render_template('7-states_list.html', states=storage.all(State))
 
 
 if __name__ == "__main__":
