@@ -19,4 +19,9 @@ else:
     class State(BaseModel):
         """ Defined class to work with FileStorage'"""
         name = ''
-        cities = models.storage.all(City)
+        
+        
+        @property
+        def cities(self):
+            '''Function getter to amenities'''
+            return models.storage.all(City)
