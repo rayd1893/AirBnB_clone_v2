@@ -20,7 +20,8 @@ def teardown_db(exception):
 def cities_by_states():
     '''List all States'''
 
-    return render_template('8-cities_by_states.html', states=storage.all(State))
+    return render_template(
+        '8-cities_by_states.html', states=storage.all(State))
 
 
 if __name__ == "__main__":
