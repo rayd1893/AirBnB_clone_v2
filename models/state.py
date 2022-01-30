@@ -19,8 +19,7 @@ else:
     class State(BaseModel):
         """ Defined class to work with FileStorage'"""
         name = ''
-        
-        
+
         @property
         def cities(self):
             '''Function getter to amenities'''
