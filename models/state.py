@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
-from os import getenv
+from os import getenv, name
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import Column
 from sqlalchemy.sql.sqltypes import String
@@ -23,4 +23,9 @@ else:
         @property
         def cities(self):
             '''Function getter to amenities'''
-            return models.storage.all(City)
+            cities = []
+            l = models.storage.all(City)
+            for k, v in l.items():
+                if v.state_id == self.id:
+                    cities.append(v)
+            return cities

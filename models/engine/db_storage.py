@@ -41,7 +41,7 @@ class DBStorage:
         from models.amenity import Amenity
         my_dict = {}
         classes = [State, City, User, Place, Review, Amenity]
-        if cls:
+        if cls is not None:
             classes = [cls]
         for j in classes:
             for k in self.__session.query(j).all():
