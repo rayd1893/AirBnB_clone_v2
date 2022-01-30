@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+'''File of class DBStorage'''
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -19,6 +19,7 @@ class DBStorage:
     __session = None
 
     def __init__(self):
+        '''Define Constructor'''
         user = getenv('HBNB_MYSQL_USER')
         pwd = getenv('HBNB_MYSQL_PWD')
         host = getenv('HBNB_MYSQL_HOST')
