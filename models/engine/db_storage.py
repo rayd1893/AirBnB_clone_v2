@@ -44,7 +44,7 @@ class DBStorage:
         if cls is not None:
             classes = [cls]
         for j in classes:
-            for k in self.__session.query(j).order_by('name'):
+            for k in self.__session.query(j).all():
                 key = "{}.{}".format(type(k).__name__, k.id)
                 my_dict[key] = k
         return my_dict
