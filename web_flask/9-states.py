@@ -27,7 +27,7 @@ def states(id):
         return render_template(
             '9-states.html', states=sta, id=id)
     else:
-        for v in l.values():
+        for v in sta.values():
             if v.id == id:
                 states.append(v)
                 return render_template(
